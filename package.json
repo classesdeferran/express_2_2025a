@@ -1,0 +1,27 @@
+{
+  "name": "node_04_express_2",
+  "version": "1.0.0",
+  "description": "Express con parámetros",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/classesdeferran/express_2_2025a.git"
+  },
+  "keywords": [
+    "Node",
+    "Express"
+  ],
+  "author": "Ferran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/classesdeferran/express_2_2025a/issues"
+  },
+  "homepage": "https://github.com/classesdeferran/express_2_2025a#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
