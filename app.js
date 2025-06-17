@@ -18,8 +18,15 @@ app.get("/", (req, res) => {
   res.send("<h1>Pruebas con Express</h1>");
 });
 
+// http://localhost:8888/api?orden=desc
 app.get("/api", (req, res) => {
-  res.json(jsonData);
+    console.table(req.query);
+    let orden = ""
+    if (req.query.length > 0) { orden = req.query.orden.toLocaleLowerCase()}    
+    if (orden == "desc") {
+        return res.json(jsonData.sort( (a, b) => b.anyo - a.anyo))
+    } 
+    res.json(jsonData);
 });
 
 app.get("/api/paises", (req, res) => {
@@ -78,6 +85,12 @@ app.get('/api/paises/:nombrePais', (req, res) => {
 // /api/paises/italia/2024
 app.get('/api/paises/:nombrePais/:anyo', (req, res) => {
     console.table(req.params);
+    let nombrePais = req.params.nombrePais.toLocaleLowerCase()
+    let anyo = req.params.anyo
+    let resultadoFilter = jsonData.filter(dato => dato.pais.toLocaleLowerCase() == nombrePais && dato.anyo == anyo)
+    console.log(resultadoFilter);
+    if (resultadoFilter.length == 0) return res.status(404).json({"mensaje": `No tenemos datos de ${nombrePais} en ${anyo}`})
+    res.status(200).json(resultadoFilter)
 })
 
 
@@ -91,6 +104,11 @@ app.get("/api/anyo/2022", (req, res) => {
   }
   res.json(resultado)
 });
+
+// /api/anyos/2024
+app.get('/api/anyos/:anyo', (req, res) => {
+
+})
 
 app.listen(PORT, () => {
   console.log(`Servidor levantado en http://localhost:${PORT}`);
